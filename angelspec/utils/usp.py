@@ -125,8 +125,8 @@ def split_usp_batch(
     )
     attention_mask[:, :valid_len] = 1
 
-    chunk_len = max(local_len - ttt_length, 0)
-    ring_chunk = chunk_len * sp_ulysses_size
+    local_chunk_size = max(local_len - ttt_length, 0)
+    ring_chunk = local_chunk_size * sp_ulysses_size
     ring_start = ring_rank * ring_chunk
     position_ids = torch.arange(
         ring_start, ring_start + ring_chunk, device=input_ids.device, dtype=torch.long
